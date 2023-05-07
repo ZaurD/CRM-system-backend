@@ -1,3 +1,4 @@
 module.exports = {
-    mongoURI : "mongodb+srv://zevsdiy:123456Zaur@crm.5lpzqzt.mongodb.net/"
-}
+  mongoURI: "mongodb+srv://zevsdiy:123456Zaur@crm.5lpzqzt.mongodb.net/",
+  jwt: "dev-jwt",
+};
