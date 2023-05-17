@@ -35,6 +35,7 @@ export class AuthService {
   logout() {
     this.token = ""
     localStorage.clear()
+    console.log('test')
   }
 
   setToken(token: string) {
