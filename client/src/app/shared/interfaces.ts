@@ -3,3 +3,10 @@ export interface User {
   password: string;
   email: string;
 }
+
+export interface Category {
+  _id?: string
+  imageSrc?: string
+  name: string
+  user?: string
+}
