@@ -1,27 +1,29 @@
 <div class="page-title">
   <h4>
-    <a href="#">Категории</a>
+    <a routerLink="/categories">Категории</a>
     <i class="material-icons">keyboard_arrow_right</i>
-    {{ isNew ? "Добавить" : "Редактировать" }} категорию
+    {{isNew ? 'Добавить' : 'Редактировать'}}
   </h4>
-  <span>
-    <button class="btn btn-small red">
+  <span *ngIf="!isNew">
+    <button (click)="onDelete()"
+      class="btn btn-small red"
+      
+      [disabled]="form.disabled"
+    >
       <i class="material-icons">delete</i>
     </button>
   </span>
 </div>
 
 <div class="row">
-  <div class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="input-field">
       <input
         id="name"
         type="text"
         formControlName="name"
-        [ngClass]="{
-          invalid: form.get('name')?.invalid && form.get('name')?.touched
-        }"
-      />
+        [ngClass]="{'invalid': form.get('name')?.invalid && form.get('name')?.touched}"
+      >
       <label for="name">Название</label>
       <span
         class="helper-text red-text"
@@ -34,9 +36,17 @@
     </div>
 
     <div>
+      <input
+        type="file"
+        (change)="onFileSelect($event)"
+        class="dn"
+        #input
+      >
       <button
-        type="button"
         class="waves-effect waves-light btn orange lighten-2 mb2"
+        type="button"
+        (click)="triggerClick()"
+        [disabled]="form.disabled"
       >
         <i class="material-icons left">backup</i>
         Загрузить изображение
@@ -45,18 +55,20 @@
 
     <div>
       <button
+        class="waves-effect waves-light btn"
         type="submit"
         [disabled]="form.invalid || form.disabled"
-        class="waves-effect waves-light btn"
       >
-        Сохранить изменения
+        Сохранить
       </button>
     </div>
-  </div>
+  </form>
 
   <div class="col s12 l4 center">
-    <img class="responsive-img" style="height: 200px" src="cake.jpg" />
+    <img
+      class="responsive-img h200"
+      *ngIf="imagePreview"
+      [src]="imagePreview"
+    >
   </div>
 </div>
-
-<!-- <app-positions-form></app-positions-form> -->

@@ -5,8 +5,12 @@ export interface User {
 }
 
 export interface Category {
-  _id?: string
-  imageSrc?: string
-  name: string
-  user?: string
+  _id?: string;
+  imageSrc?: string;
+  name: string;
+  user?: string;
+}
+
+export interface Message {
+  message: string;
 }

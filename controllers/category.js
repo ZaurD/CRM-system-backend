@@ -20,15 +20,15 @@ module.exports.getById = async function (req, res) {
   }
 };
 
-module.exports.remove = async function (req, res) {
+module.exports.delete = async function(req, res) {
   try {
-    await Category.remove({ _id: req.params.id });
-    await Position.remove({ category: req.params.id });
-    res.status(200).json({ message: "Category was deleted" });
+    await Category.deleteOne({_id: req.params.id})
+    await Position.find({category: req.params.id})
+    res.status(200).json({message: 'Удалено'})
   } catch (e) {
-    error.handler(res, e);
+    errorHandler(res, e)
   }
-};
+}
 
 module.exports.create = async function (req, res) {
   const category = new Category({
@@ -59,7 +59,8 @@ module.exports.update = async function (req, res) {
       { _id: req.params.id },
       { $set: updated },
       { new: true }
-    );
+    )
+    res.status(200).json(category);
   } catch (e) {
     error.handler(res, e);
   }
